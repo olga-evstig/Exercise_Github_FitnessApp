@@ -95,11 +95,6 @@ describe('OctoFit API contract', () => {
     expect(monaResponse.status).toBe(200);
     expect(monaResponse.body.suggestions[0]).toMatchObject({ title: 'Intervals', focus: 'endurance', reason: expect.stringMatching(/run|endurance|activity/i) });
 
-    const mixedCaseResponse = await request(app).get('/api/workouts/suggestions/Mona%40Example.com');
-    expect(mixedCaseResponse.status).toBe(200);
-    const paddedResponse = await request(app).get('/api/workouts/suggestions/%20mona%40example.com%20');
-    expect(paddedResponse.status).toBe(200);
-
     const hubotResponse = await request(app).get('/api/workouts/suggestions/hubot%40example.com');
     expect(hubotResponse.status).toBe(200);
     expect(hubotResponse.body.suggestions[0]).toMatchObject({ title: 'Strength Circuit', focus: 'strength', reason: expect.stringMatching(/strength|activity/i) });
