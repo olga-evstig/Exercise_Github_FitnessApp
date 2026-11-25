@@ -110,7 +110,8 @@ const activityFocusByType: Record<string, string> = {
 };
 
 export async function suggestWorkouts(userEmail: string) {
-  const user = await User.findOne({ email: userEmail }).lean();
+  const normalizedEmail = userEmail.trim().toLowerCase();
+  const user = await User.findOne({ email: normalizedEmail }).lean();
   if (!user) throw new ApiError('No user found for that email address', 404);
 
   const [workouts, recentActivity] = await Promise.all([
